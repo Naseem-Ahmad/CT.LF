@@ -3,31 +3,96 @@
 }
 
 <main>
-    <section class="row" aria-labelledby="aspnetTitle">
-        <h1 id="title">ASP.NET</h1>
-        <p class="lead">ASP.NET is a free web framework for building great Web sites and Web applications using HTML, CSS and JavaScript.</p>
-        <p><a href="https://asp.net" class="btn btn-primary btn-md">Learn more &raquo;</a></p>
-    </section>
+    <h2>Location  Finder App</h2>
+    <ul>
+        <li>FrontEnd: Razor page
+        <li>BackEnd: C#
+        <li>ORM    : Entity Framework
+        <li>Pattern: MVC
+        <li>Database: SQL
+    </ul>
+    @{
+        ViewBag.Title = "Get Location on Click";
+    }
 
-    <div class="row">
-        <section class="col-md-4" aria-labelledby="gettingStartedTitle">
-            <h2 id="gettingStartedTitle">Getting started</h2>
-            <p>
-                ASP.NET MVC gives you a powerful, patterns-based way to build dynamic websites that
-                enables a clean separation of concerns and gives you full control over markup
-                for enjoyable, agile development.
-            </p>
-            <p><a class="btn btn-outline-dark" href="https://go.microsoft.com/fwlink/?LinkId=301865">Learn more &raquo;</a></p>
-        </section>
-        <section class="col-md-4" aria-labelledby="librariesTitle">
-            <h2 id="librariesTitle">Get more libraries</h2>
-            <p>NuGet is a free Visual Studio extension that makes it easy to add, remove, and update libraries and tools in Visual Studio projects.</p>
-            <p><a class="btn btn-outline-dark" href="https://go.microsoft.com/fwlink/?LinkId=301866">Learn more &raquo;</a></p>
-        </section>
-        <section class="col-md-4" aria-labelledby="hostingTitle">
-            <h2 id="hostingTitle">Web Hosting</h2>
-            <p>You can easily find a web hosting company that offers the right mix of features and price for your applications.</p>
-            <p><a class="btn btn-outline-dark" href="https://go.microsoft.com/fwlink/?LinkId=301867">Learn more &raquo;</a></p>
-        </section>
-    </div>
+    <h2>Get Location Example</h2>
+
+    <button id="find-me">Show my location</button><br />
+    <p id="status"></p>
+    <a id="map-link" target="_blank"></a>
+
+    @*<script>
+            function geoFindMe() {
+                const status = document.querySelector("#status");
+                const mapLink = document.querySelector("#map-link");
+
+                mapLink.href = "";
+                mapLink.textContent = "";
+
+                function success(position) {
+                    const latitude = position.coords.latitude;
+                    const longitude = position.coords.longitude;
+
+                    status.textContent = "";
+                    mapLink.href = `https://www.openstreetmap.org/#map=18/${latitude}/${longitude}`;
+                    mapLink.textContent = `Latitude: ${latitude} °, Longitude: ${longitude} °`;
+                }
+
+                function error() {
+                    status.textContent = "Unable to retrieve your location";
+                }
+
+                if (!navigator.geolocation) {
+                    status.textContent = "Geolocation is not supported by your browser";
+                } else {
+                    status.textContent = "Locating…";
+                    navigator.geolocation.getCurrentPosition(success, error);
+                }
+            }
+
+            document.querySelector("#find-me").addEventListener("click", geoFindMe);
+        </script>*@
+
+    <script>
+        function geoFindMe() {
+            const status = document.querySelector("#status");
+            const mapLink = document.querySelector("#map-link");
+
+            mapLink.href = "";
+            mapLink.textContent = "";
+
+            function success(position) {
+                const latitude = position.coords.latitude;
+                const longitude = position.coords.longitude;
+                const accuracy = position.coords.accuracy;
+
+                status.textContent = `Accuracy: ±${accuracy} meters`;
+                mapLink.href = `https://www.openstreetmap.org/#map=18/${latitude}/${longitude}`;
+                mapLink.textContent = `Latitude: ${latitude}°, Longitude: ${longitude}°`;
+            }
+
+            function error() {
+                status.textContent = "Unable to retrieve your location";
+            }
+
+            if (!navigator.geolocation) {
+                status.textContent = "Geolocation is not supported by your browser";
+            } else {
+                status.textContent = "Locating… (please allow location access)";
+                navigator.geolocation.getCurrentPosition(success, error, {
+                    enableHighAccuracy: true,   // ✅ ask for GPS-level precision
+                    timeout: 10000,             // wait up to 10s
+                    maximumAge: 0               // don't use cached data
+                });
+            }
+        }
+
+        document.querySelector("#find-me").addEventListener("click", geoFindMe);
+    </script>
+
 </main>
+    @Html.AntiForgeryToken()
+
+
+
+

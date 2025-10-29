@@ -10,9 +10,20 @@ namespace CT.LF.UI.Controllers
     {
         public ActionResult Index()
         {
+
             return View();
         }
 
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public JsonResult SaveLocation(double latitude, double longitude)
+        {
+            // You could log this to a database, for example:
+            // _db.Locations.Add(new UserLocation { Lat = latitude, Lng = longitude });
+            // _db.SaveChanges();
+
+            return Json(new { success = true, message = "Location received", latitude, longitude });
+        }
         public ActionResult About()
         {
             ViewBag.Message = "Your application description page.";
