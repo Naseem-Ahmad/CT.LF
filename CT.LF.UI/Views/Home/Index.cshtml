@@ -2,56 +2,21 @@
     ViewBag.Title = "Home Page";
 }
 
-<main>
-    <h2>Location  Finder App</h2>
-    <ul>
-        <li>FrontEnd: Razor page
-        <li>BackEnd: C#
-        <li>ORM    : Entity Framework
-        <li>Pattern: MVC
-        <li>Database: SQL
-    </ul>
+<main class="geo-container">
     @{
         ViewBag.Title = "Get Location on Click";
     }
 
-    <h2>Get Location Example</h2>
+    <div class="geo-card">
+        <h2 class="geo-title">🌍 Get Your Current Location</h2>
 
-    <button id="find-me">Show my location</button><br />
-    <p id="status"></p>
-    <a id="map-link" target="_blank"></a>
+        <button id="find-me" class="geo-btn">Show My Location</button>
 
-    @*<script>
-            function geoFindMe() {
-                const status = document.querySelector("#status");
-                const mapLink = document.querySelector("#map-link");
+        <p id="status" class="geo-status"></p>
+        <a id="map-link" class="geo-link" target="_blank"></a>
+    </div>
 
-                mapLink.href = "";
-                mapLink.textContent = "";
-
-                function success(position) {
-                    const latitude = position.coords.latitude;
-                    const longitude = position.coords.longitude;
-
-                    status.textContent = "";
-                    mapLink.href = `https://www.openstreetmap.org/#map=18/${latitude}/${longitude}`;
-                    mapLink.textContent = `Latitude: ${latitude} °, Longitude: ${longitude} °`;
-                }
-
-                function error() {
-                    status.textContent = "Unable to retrieve your location";
-                }
-
-                if (!navigator.geolocation) {
-                    status.textContent = "Geolocation is not supported by your browser";
-                } else {
-                    status.textContent = "Locating…";
-                    navigator.geolocation.getCurrentPosition(success, error);
-                }
-            }
-
-            document.querySelector("#find-me").addEventListener("click", geoFindMe);
-        </script>*@
+    @Html.AntiForgeryToken()
 
     <script>
         function geoFindMe() {
@@ -80,19 +45,84 @@
             } else {
                 status.textContent = "Locating… (please allow location access)";
                 navigator.geolocation.getCurrentPosition(success, error, {
-                    enableHighAccuracy: true,   // ✅ ask for GPS-level precision
-                    timeout: 10000,             // wait up to 10s
-                    maximumAge: 0               // don't use cached data
+                    enableHighAccuracy: true,
+                    timeout: 10000,
+                    maximumAge: 0
                 });
             }
         }
 
         document.querySelector("#find-me").addEventListener("click", geoFindMe);
     </script>
-
 </main>
-    @Html.AntiForgeryToken()
 
+<style>
+    /* Page background and alignment */
+    .geo-container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        min-height: 80vh;
+        background: linear-gradient(135deg, #f0f4ff, #e6f7ff);
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        padding: 20px;
+    }
 
+    /* Card styling */
+    .geo-card {
+        background: #ffffff;
+        padding: 2rem 3rem;
+        border-radius: 20px;
+        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+        text-align: center;
+        max-width: 500px;
+        width: 100%;
+    }
 
+    .geo-title {
+        font-size: 1.8rem;
+        margin-bottom: 1rem;
+        color: #0078d7;
+        font-weight: 700;
+    }
 
+    /* Button styling */
+    .geo-btn {
+        background: #0078d7;
+        color: #fff;
+        border: none;
+        padding: 0.75rem 2rem;
+        border-radius: 10px;
+        font-size: 1rem;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        margin-bottom: 1rem;
+    }
+
+        .geo-btn:hover {
+            background: #005fa3;
+            transform: scale(1.05);
+        }
+
+    /* Status and link */
+    .geo-status {
+        font-size: 1rem;
+        color: #333;
+        margin-top: 0.5rem;
+    }
+
+    .geo-link {
+        display: block;
+        margin-top: 0.75rem;
+        text-decoration: none;
+        color: #0078d7;
+        font-weight: 600;
+        transition: color 0.3s ease;
+    }
+
+        .geo-link:hover {
+            color: #005fa3;
+            text-decoration: underline;
+        }
+</style>

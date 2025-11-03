@@ -1,10 +1,73 @@
 ﻿@{
-    ViewBag.Title = "About";
+    ViewData["Title"] = "About";
 }
-<main aria-labelledby="title">
-    <h2 id="title">@ViewBag.Title.</h2>
-    <h3>@ViewBag.Message</h3>
 
-    <p>I'm an example for the asp.net MVC framework with Entity framework (With Database first approch)
-    </p>
-</main>
+<section class="container mt-5">
+    <div class="text-center mb-4">
+        <h1 class="display-5 fw-bold">About This Project</h1>
+        <p class="text-muted">A modern web development learning initiative built with .NET technologies</p>
+    </div>
+
+    <div class="card shadow-sm p-4 border-0 rounded-4">
+        <h3 class="fw-semibold mb-3">Development Notice</h3>
+        <p>
+            We are a small development team currently focused on implementing <strong>CI/CD pipelines</strong>
+            and modern deployment practices. Our main goal is to create a space where developers can
+            explore and learn from real, working examples using today’s most relevant tools and technologies.
+        </p>
+        <p>
+            The site’s design and layout may not be perfect at the moment - and that’s okay!
+            We are prioritizing modern coding practices, maintainability, and hands-on learning over
+            aesthetics. As development continues, we’ll be improving the overall presentation, user experience,
+            and structure.
+        </p>
+    </div>
+
+    <div class="card shadow-sm p-4 border-0 rounded-4 mt-4">
+        <h3 class="fw-semibold mb-3">Technical Stack</h3>
+        <ul class="list-group list-group-flush">
+            <li class="list-group-item">
+                <strong>Frontend:</strong> ASP.NET Framework MVC (<em>Razor View</em>)
+            </li>
+            <li class="list-group-item">
+                <strong>Backend:</strong> C# with MS SQL Server (Database)
+            </li>
+            <li class="list-group-item">
+                <strong>Environment:</strong> .NET Framework 4.XX
+            </li>
+            <li class="list-group-item">
+                <strong>ORM:</strong> Entity Framework  (Database First Approach)
+            </li>
+            <li class="list-group-item">
+                <strong>Deployment:</strong> Deployed on <em>Somee</em> using FTP (Filezila)
+            </li>
+        </ul>
+    </div>
+
+    <div class="text-center mt-5">
+        <p class="text-muted small">
+            Built with ❤️
+        </p>
+    </div>
+</section>
+
+<style>
+    body {
+        background-color: #f8f9fa;
+    }
+
+    .card {
+        background-color: #fff;
+    }
+
+    h3 {
+        color: #0d6efd;
+    }
+
+    .list-group-item {
+        border: none;
+        background-color: #f9f9f9;
+        border-radius: 8px;
+        margin-bottom: 6px;
+    }
+</style>
